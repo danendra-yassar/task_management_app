@@ -22,10 +22,24 @@ class TaskController extends Controller
             });
         } 
         
-
         if ($request->has('status')) {
-            $query->where('status', $request->status);
+        $statusFilter = $request->status;
+
+        if ($user->role === '3') {
+            // role user using pivot data
+            $query->whereHas('assignedUsers', function($q) use ($user, $statusFilter) {
+                $q->where('users.id', $user->id);
+                if ($statusFilter === 'pending') {
+                    // status awal bernilai null yang berarti 'pending'
+                    $q->whereNull('task_user.status');
+                } else {
+                    $q->where('task_user.status', $statusFilter);
+                }
+            });
+        } else {
+            $query->where('status', $statusFilter);
         }
+    }
 
         if ($request->has('priority')) {
             $query->where('priority', $request->priority);

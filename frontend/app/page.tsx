@@ -158,6 +158,15 @@ export default function DashboardPage() {
                         <input type="text" placeholder="Type title..." value={search} onChange={(e) => { setSearch(e.target.value); setPage(1); }} className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
                     </div>
                     <div>
+                        <label className="block text-xs font-semibold text-slate-400 uppercase mb-1">Filter Status</label>
+                        <select value={status} onChange={(e) => { setStatus(e.target.value); setPage(1); }} className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                    <div>
                         <label className="block text-xs font-semibold text-slate-400 uppercase mb-1">Filter Priority</label>
                         <select value={priority} onChange={(e) => { setPriority(e.target.value); setPage(1); }} className="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
                             <option value="">All Priorities</option>
